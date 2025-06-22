@@ -1,10 +1,9 @@
 import os
 from datetime import datetime
-import requests
 import json
 import base64
-
 from dotenv import load_dotenv
+import requests
 
 # Charger les variables d'environnement
 load_dotenv()
@@ -46,7 +45,7 @@ def sync_with_github():
                     content = base64.b64encode(f.read()).decode()
 
                 api_url = f"https://api.github.com/repos/{github_repo}/contents/{file_path}"
-                
+
                 # Requête GET rapide avec timeout court
                 try:
                     get_response = requests.get(api_url, headers=headers, timeout=3)
@@ -59,7 +58,7 @@ def sync_with_github():
                     "content": content,
                     "branch": github_branch
                 }
-                
+
                 if sha:
                     data["sha"] = sha
 
@@ -67,8 +66,9 @@ def sync_with_github():
                 put_response = requests.put(api_url, headers=headers, json=data, timeout=5)
 
                 if put_response.status_code in [200, 201]:
-                    files_updated += 1
                     print(f"✅ {file_path}")
+                else:
+                    print(f"❌ {file_path} non modifié — {put_response.status_code}")
 
             except Exception:
                 continue
