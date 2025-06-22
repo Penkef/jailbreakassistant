@@ -35,15 +35,15 @@ function setupTitleInteraction() {
     }
 }
 
-// Effet de parallaxe léger pour la bannière
+// Effet de parallaxe pour la bannière - l'image monte quand on scroll vers le bas
 function setupParallaxEffect() {
     window.addEventListener('scroll', () => {
-        const banner = document.querySelector('.banner');
+        const bannerImage = document.querySelector('.banner-image');
         const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5;
+        const rate = scrolled * 0.8; // Plus le nombre est grand, plus l'effet est prononcé
         
-        if (banner) {
-            banner.style.transform = `translateY(${rate}px)`;
+        if (bannerImage) {
+            bannerImage.style.transform = `translateY(-${rate}px)`;
         }
     });
 }
