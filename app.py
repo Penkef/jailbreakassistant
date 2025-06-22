@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 Jailbreak Assistant - Backend Python
@@ -25,16 +24,16 @@ def get_site_info():
 
 if __name__ == "__main__":
     import sys
-    
+
     # Synchronisation automatique à chaque lancement
     print("🔄 Synchronisation automatique avec GitHub...")
     sync_with_github()
     print()
-    
+
     if len(sys.argv) > 1 and sys.argv[1] == "--sync":
         print("✅ Synchronisation manuelle terminée")
     else:
-        print('a')  # Ajouté ici pour que ce soit dans le flux principal
+        print('a')  # TEST DE SYNCHRONISATION - 2025-06-22
         log_access()
         info = get_site_info()
         print(f"=== {info['name']} ===")
