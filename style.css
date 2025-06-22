@@ -9,6 +9,25 @@ html, body {
     color: white;
 }
 
+.banner {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    padding: 10px 0;
+    text-align: center;
+}
+
+.banner-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 80px;
+    object-fit: contain;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -16,6 +35,7 @@ html, body {
     align-items: center;
     height: 100vh;
     text-align: center;
+    padding-top: 100px;
 }
 
 h1 {
