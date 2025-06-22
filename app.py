@@ -1,15 +1,21 @@
+
 #!/usr/bin/env python3
 """
-Jailbreak Assistant - Backend Python
+Jailbreak Assistant - Backend Python avec serveur Flask
 """
 import os
 from datetime import datetime
+from flask import Flask, send_from_directory, redirect, request
 from github_sync import sync_with_github, verify_sync_status
+
+app = Flask(__name__)
+
 def log_access():
     """Log website access"""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open("access.log","a") as f:
         f.write(f"Site accessed at: {timestamp}\n")
+
 def get_site_info():
     """Get basic site information"""
     return {
@@ -18,18 +24,71 @@ def get_site_info():
         "status": "Coming Soon",
         "version": "1.0.0"
     }
+
+@app.before_request
+def force_https():
+    """Force HTTPS in production"""
+    if not request.is_secure and request.headers.get('X-Forwarded-Proto') != 'https':
+        if 'replit.dev' in request.host:
+            return redirect(request.url.replace('http://', 'https://'))
+
+@app.after_request
+def after_request(response):
+    """Add security headers"""
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    return response
+
+@app.route('/')
+def home():
+    """Redirect to home page"""
+    log_access()
+    return redirect('/home')
+
+@app.route('/home')
+def home_page():
+    """Serve home page"""
+    log_access()
+    return send_from_directory('Home Page', 'home.html')
+
+@app.route('/values')
+def values_page():
+    """Serve values page"""
+    log_access()
+    return send_from_directory('Values Page', 'values.html')
+
+@app.route('/<path:filename>')
+def serve_files(filename):
+    """Serve static files"""
+    try:
+        if filename.startswith('Home Page/'):
+            return send_from_directory('Home Page', filename[10:])
+        elif filename.startswith('Values Page/'):
+            return send_from_directory('Values Page', filename[12:])
+        elif filename.startswith('pictures/'):
+            return send_from_directory('pictures', filename[9:])
+        else:
+            return send_from_directory('.', filename)
+    except:
+        return redirect('/Home Page/home.html')
+
 if __name__ == "__main__":
     # Synchronisation automatique à chaque lancement
     print("🔄 Synchronisation automatique avec GitHub...")
-    sync_with_github()  # Cette ligne exécute la synchronisation
+    sync_with_github()
     print()
-    # Lancement normal du programme
-    log_access()
+    
+    # Lancement du serveur web
     info = get_site_info()
     print(f"=== {info['name']} ===")
     print(f"URL: {info['url']}")
     print(f"Status: {info['status']}")
     print(f"Version: {info['version']}")
     print("\nSynchronisation automatique activée ✅")
+    print("🌐 Serveur web démarré sur http://0.0.0.0:3000")
     print()
     verify_sync_status()
+    
+    # Démarrer le serveur Flask
+    app.run(host='0.0.0.0', port=3000, debug=True, threaded=True, use_reloader=False)
