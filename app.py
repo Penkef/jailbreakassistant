@@ -26,16 +26,21 @@ def get_site_info():
 if __name__ == "__main__":
     import sys
     
+    # Synchronisation automatique à chaque lancement
+    print("🔄 Synchronisation automatique avec GitHub...")
+    sync_with_github()
+    print()
+    
     if len(sys.argv) > 1 and sys.argv[1] == "--sync":
-        sync_with_github()
+        print("✅ Synchronisation manuelle terminée")
     else:
-        print('d')  # Ajouté ici pour que ce soit dans le flux principal
+        print('a')  # Ajouté ici pour que ce soit dans le flux principal
         log_access()
         info = get_site_info()
         print(f"=== {info['name']} ===")
         print(f"URL: {info['url']}")
         print(f"Status: {info['status']}")
         print(f"Version: {info['version']}")
-        print("\nPour synchroniser avec GitHub: python app.py --sync")
+        print("\nSynchronisation automatique activée ✅")
         print()
         verify_sync_status()
