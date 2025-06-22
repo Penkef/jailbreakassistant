@@ -8,7 +8,7 @@ from github_sync import sync_with_github, verify_sync_status
 def log_access():
     """Log website access"""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    with open("access.log") as f:
+    with open("access.log","a") as f:
         f.write(f"Site accessed at: {timestamp}\n")
 def get_site_info():
     """Get basic site information"""
