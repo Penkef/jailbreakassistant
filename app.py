@@ -29,6 +29,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--sync":
         sync_with_github()
     else:
+        print('d')  # Ajouté ici pour que ce soit dans le flux principal
         log_access()
         info = get_site_info()
         print(f"=== {info['name']} ===")
