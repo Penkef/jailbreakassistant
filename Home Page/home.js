@@ -35,29 +35,10 @@ function setupTitleInteraction() {
     }
 }
 
-// Effet de parallaxe pour la bannière - l'image monte quand on scroll vers le bas
+// Pas d'effet de parallaxe - la bannière reste fixe
 function setupParallaxEffect() {
-    let ticking = false;
-    
-    function updateTransform() {
-        const bannerImage = document.querySelector('.banner-image');
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * 0.5; // Réduit pour plus de fluidité
-        
-        if (bannerImage) {
-            bannerImage.style.transform = `translateY(-${rate}px)`;
-        }
-        ticking = false;
-    }
-    
-    function requestTick() {
-        if (!ticking) {
-            requestAnimationFrame(updateTransform);
-            ticking = true;
-        }
-    }
-    
-    window.addEventListener('scroll', requestTick);
+    // Bannière reste fixe, plus d'effet de parallaxe
+    console.log('Bannière fixe activée');
 }
 
 // Gestionnaire de clics pour les cartes de fonctionnalités
