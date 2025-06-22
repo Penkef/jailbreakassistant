@@ -15,7 +15,7 @@ html, body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 1;
     overflow: hidden;
 }
 
@@ -24,8 +24,6 @@ html, body {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: transform;
 }
 
 .container {
@@ -37,6 +35,9 @@ html, body {
     text-align: center;
     padding-top: 220px;
     padding-bottom: 50px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    position: relative;
+    z-index: 2;
 }
 
 h1 {
@@ -71,26 +72,16 @@ p {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 15px;
-    padding: 30px 20px;
+    padding: 0;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-}
-
-.feature-card::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
-    border-radius: 17px;
-    z-index: -2;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .feature-card::after {
@@ -111,11 +102,6 @@ p {
 .feature-card:hover {
     transform: translateY(-10px) scale(1.05);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.feature-card:hover::before {
-    opacity: 1;
 }
 
 .feature-card:hover::after {
@@ -127,51 +113,17 @@ p {
     transform: translateY(-8px) scale(1.02);
 }
 
-.feature-icon {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 15px;
-    border-radius: 50%;
-    background: rgba(255, 215, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.feature-icon img {
-    width: 40px;
-    height: 40px;
+.feature-card img {
+    width: 80%;
+    height: 80%;
     object-fit: contain;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.5));
+    transition: transform 0.3s ease;
 }
 
-.feature-card:hover .feature-icon {
+.feature-card:hover img {
     transform: scale(1.1);
-    background: rgba(255, 215, 0, 0.3);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-}
-
-.feature-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #FFD700;
-    transition: color 0.3s ease;
-}
-
-.feature-card:hover h3 {
-    color: #FFF;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
-.feature-card p {
-    font-size: 1rem;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-}
-
-.feature-card:hover p {
-    opacity: 1;
+    filter: drop-shadow(2px 2px 12px rgba(255, 215, 0, 0.3));
 }
 
 @media (max-width: 768px) {
