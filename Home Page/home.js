@@ -82,9 +82,31 @@ function setupFeatureCardHandlers() {
     });
 }
 
+// Fonction pour mettre à jour la date de dernière modification
+function updateLastModified() {
+    const lastUpdatedElement = document.querySelector('.last-updated');
+    if (lastUpdatedElement) {
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZoneName: 'short'
+        };
+        const formattedDate = now.toLocaleDateString('fr-FR', options);
+        lastUpdatedElement.textContent = formattedDate;
+    }
+}
+
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded - Jailbreak Assistant Home ready');
+    
+    // Mettre à jour la date de dernière modification
+    updateLastModified();
     
     // Démarrer les animations
     setTimeout(animateFeatureCards, 500);
