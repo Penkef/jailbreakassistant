@@ -58,7 +58,7 @@ function setupFeatureCardHandlers() {
             // Placeholder pour les actions futures
             switch(feature) {
                 case 'values':
-                    console.log('🔢 Redirection vers Values (à venir)');
+                    window.location.href = '/values';
                     break;
                 case 'dupe-finder':
                     console.log('🔍 Redirection vers Dupe Finder (à venir)');
