@@ -1,8 +1,9 @@
+import os
+from datetime import datetime
 import requests
 import json
-import os
 import base64
-from datetime import datetime
+
 from dotenv import load_dotenv
 
 # Charger les variables d'environnement
@@ -26,7 +27,20 @@ def sync_with_github():
         }
 
         # Fichiers à synchroniser
-        files_to_sync = ['index.html', 'style.css', 'script.js', 'app.py']
+        files_to_sync = [
+            'index.html', 
+            'style.css', 
+            'script.js', 
+            'app.py',
+            'home.html',
+            'home.css', 
+            'home.js',
+            'Home Page/home.html',
+            'Home Page/home.css',
+            'Home Page/home.js',
+            'github_sync.py',
+            'requirements.txt'
+        ]
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         files_updated = 0
@@ -84,7 +98,7 @@ def verify_sync_status():
     """Afficher le statut de synchronisation dans la console"""
     github_repo = os.getenv('GITHUB_REPO')
     github_branch = os.getenv('GITHUB_BRANCH', 'main')
-    
+
     print("=" * 50)
     print("🔍 VÉRIFICATION DE SYNCHRONISATION")
     print("=" * 50)
