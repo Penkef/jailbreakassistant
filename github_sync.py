@@ -32,15 +32,19 @@ def sync_with_github():
             'style.css', 
             'script.js', 
             'app.py',
-            'home.html',
-            'home.css', 
-            'home.js',
             'Home Page/home.html',
             'Home Page/home.css',
             'Home Page/home.js',
             'github_sync.py',
             'requirements.txt'
         ]
+        
+        # Synchroniser aussi les images dans le dossier pictures
+        pictures_dir = 'pictures'
+        if os.path.exists(pictures_dir):
+            for file in os.listdir(pictures_dir):
+                if os.path.isfile(os.path.join(pictures_dir, file)):
+                    files_to_sync.append(f'pictures/{file}')
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         files_updated = 0
