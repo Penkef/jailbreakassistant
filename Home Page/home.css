@@ -1,10 +1,12 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap');
+
 html, body {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Exo 2', sans-serif;
     background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
     color: white;
 }
@@ -33,29 +35,88 @@ html, body {
     align-items: center;
     min-height: 100vh;
     text-align: center;
-    padding-top: 220px;
+    padding-top: 0px;
     padding-bottom: 50px;
     background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
     position: relative;
-    z-index: 2;
+    z-index: 10;
+    margin-top: 400px;
 }
 
 h1 {
-    font-size: 3rem;
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    animation: glow 2s ease-in-out infinite alternate;
+    letter-spacing: 3px;
 }
 
-@keyframes glow {
-    from { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-    to { text-shadow: 2px 2px 20px rgba(255,215,0,0.5); }
+h1::before {
+    content: "Jailbreak ";
+    color: #ff4444;
+    text-shadow: 
+        0 0 10px #ff4444,
+        0 0 20px #ff4444,
+        0 0 30px #ff4444,
+        0 0 40px #ff0000;
+    animation: redGlow 2s ease-in-out infinite alternate;
+}
+
+h1::after {
+    content: "Assistant";
+    color: #4444ff;
+    text-shadow: 
+        0 0 10px #4444ff,
+        0 0 20px #4444ff,
+        0 0 30px #4444ff,
+        0 0 40px #0000ff;
+    animation: blueGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes redGlow {
+    from { 
+        text-shadow: 
+            0 0 10px #ff4444,
+            0 0 20px #ff4444,
+            0 0 30px #ff4444,
+            0 0 40px #ff0000;
+    }
+    to { 
+        text-shadow: 
+            0 0 20px #ff4444,
+            0 0 30px #ff4444,
+            0 0 40px #ff4444,
+            0 0 50px #ff0000,
+            0 0 60px #ff0000;
+    }
+}
+
+@keyframes blueGlow {
+    from { 
+        text-shadow: 
+            0 0 10px #4444ff,
+            0 0 20px #4444ff,
+            0 0 30px #4444ff,
+            0 0 40px #0000ff;
+    }
+    to { 
+        text-shadow: 
+            0 0 20px #4444ff,
+            0 0 30px #4444ff,
+            0 0 40px #4444ff,
+            0 0 50px #0000ff,
+            0 0 60px #0000ff;
+    }
 }
 
 p {
-    font-size: 1.2rem;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 300;
+    font-size: 1.3rem;
     margin: 0.5rem 0;
     opacity: 0.9;
+    letter-spacing: 1px;
 }
 
 .features {
@@ -69,61 +130,58 @@ p {
 }
 
 .feature-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
+    background: transparent;
+    border-radius: 0;
     padding: 0;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    transition: transform 0.3s ease;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.feature-card::after {
+.feature-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 15px;
     z-index: -1;
-    transform: translateY(5px);
+    filter: blur(15px);
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .feature-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    transform: scale(1.1);
 }
 
-.feature-card:hover::after {
+.feature-card:hover::before {
     opacity: 1;
-    transform: translateY(8px);
 }
 
 .feature-card:active {
-    transform: translateY(-8px) scale(1.02);
+    transform: scale(1.05);
 }
 
 .feature-card img {
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.5));
     transition: transform 0.3s ease;
 }
 
 .feature-card:hover img {
-    transform: scale(1.1);
-    filter: drop-shadow(2px 2px 12px rgba(255, 215, 0, 0.3));
+    transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
@@ -147,9 +205,10 @@ p {
     }
     
     .container {
-        padding-top: 140px;
+        padding-top: 100px;
         padding-left: 15px;
         padding-right: 15px;
+        margin-top: 120px;
     }
 }
 
@@ -159,7 +218,8 @@ p {
     }
     
     .container {
-        padding-top: 120px;
+        padding-top: 80px;
+        margin-top: 100px;
     }
     
     h1 {
