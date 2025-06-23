@@ -42,27 +42,27 @@ def after_request(response):
 
 @app.route('/')
 def home():
-    """Redirect to home page"""
+    """Redirect to home_page"""
     log_access()
     return redirect('/home')
 
 @app.route('/home')
 def home_page():
-    """Serve home page"""
+    """Serve home_page"""
     log_access()
-    return send_from_directory('Home Page', 'home.html')
+    return send_from_directory('home_page', 'home.html')
 
 @app.route('/values')
 def values_page():
-    """Serve values page"""
+    """Serve value_page"""
     log_access()
-    return send_from_directory('Values Page', 'values.html')
+    return send_from_directory('value_page', 'values.html')
 
 # Routes pour servir les fichiers statiques spécifiques
-@app.route('/Home Page/<path:filename>')
+@app.route('/home_page/<path:filename>')
 def serve_home_files(filename):
-    """Serve Home Page static files"""
-    return send_from_directory('Home Page', filename)
+    """Serve home_page static files"""
+    return send_from_directory('home_page', filename)
 
 @app.route('/pictures/<path:filename>')
 def serve_pictures(filename):
@@ -74,9 +74,9 @@ def serve_files(filename):
     """Serve static files and redirect old URLs"""
     try:
         # Rediriger les accès directs vers les URLs propres
-        if filename == 'Home Page/home.html':
+        if filename == 'home_page/home.html':
             return redirect('/home', code=301)
-        elif filename == 'Values Page/values.html':
+        elif filename == 'value_page/values.html':
             return redirect('/values', code=301)
         elif filename.startswith('home_page'):
             return redirect('/home', code=301)
