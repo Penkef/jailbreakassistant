@@ -1,0 +1,92 @@
+Replit AI — Correction complète de la page Values
+Voici les éléments à corriger ou améliorer sur la page "Values", avec un détail précis pour chaque problème :
+
+1. Bannière : débordement horizontal
+Problème réel :
+La bannière en haut de la page déborde sur les côtés, ce qui fait décaler ou couper la carte des items à droite. Ce n’est pas un problème de hauteur mais de largeur excessive ou de comportement overflow mal géré.
+
+Attendu :
+
+La bannière doit avoir une largeur maximum de 100% du viewport (max-width: 100vw) et pas dépasser horizontalement.
+
+Elle doit s’adapter au container principal sans créer de scroll horizontal ni casser l’alignement des éléments (notamment les cartes).
+
+Appliquer overflow-x: hidden sur le body ou html peut aussi aider à bloquer les débordements visuels.
+
+2. Carte principale décalée / coupée à droite
+Problème :
+La carte contenant les items est coupée à droite, ce qui casse la bordure arrondie et donne un effet visuellement "cassé".
+
+Attendu :
+
+La carte doit être parfaitement centrée et affichée en entier, avec des bordures visibles à gauche comme à droite.
+
+Il faut corriger les width, margin, padding, ou overflow qui empêchent le bon rendu.
+
+3. Animation des fonds colorés selon la rareté
+Problème :
+L’animation actuelle change les couleurs de manière saccadée ou en étapes nettes.
+
+Attendu :
+
+Les transitions de couleurs doivent être fluides, continues et cycliques.
+
+Utiliser un linear-gradient animé avec background-position et transition bien réglés permet de créer cet effet.
+
+L'effet doit rappeler une aura rêveuse, avec plusieurs variantes d'une même couleur dominante selon la rareté (dupe, clean, rare, etc.).
+
+4. Texte "Built by the community..." mal positionné
+Attendu :
+
+Le texte :
+
+csharp
+Copier
+Modifier
+Built by the community, NOT by Badimo.
+Made by theblueel and penkef.
+doit apparaître l’un au-dessus de l’autre, juste sous la section "About", comme c'était le cas avant.
+
+5. Bas de page non centré
+Problème :
+Le texte "Version" et "Last updated" en bas de page n’est pas centré.
+
+Attendu :
+Centrer horizontalement ces éléments avec text-align: center ou via un système de grille ou flexbox.
+
+6. Bloc d’information à encadrer avec effet d’ombre
+Texte concerné :
+"The Jailbreak Assistant list is coming soon..."
+
+Attendu :
+
+Ce bloc doit avoir un fond avec bordure et ombre portée,
+
+Pour donner un effet de carte 3D derrière le texte.
+
+7. Menu du haut (Home, Values, History, Dupe list)
+Amélioration souhaitée :
+
+Les 4 boutons doivent être dans un seul bloc avec bords arrondis,
+
+Fond légèrement bleuté et semi-transparent,
+
+Et un effet de flou de fond (backdrop-filter: blur) pour créer un effet moderne et "verre givré".
+
+8. Barre de recherche sur mobile
+Problème :
+Sur mobile, la barre de recherche est trop collée aux bords de l’écran.
+
+Attendu :
+Ajouter des marges latérales responsives, pour éviter tout écrasement visuel.
+
+9. Alignement et équilibrage du texte d’intro
+Texte :
+"The Jailbreak Assistant list is coming soon..." (même que point 6)
+
+Attendu :
+
+Le texte doit être affiché dans un bloc bien structuré,
+
+Avec des retours à la ligne intelligents pour donner un alignement fluide et équilibré, même sans centrage parfait.
+
