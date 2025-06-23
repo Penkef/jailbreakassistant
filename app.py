@@ -54,15 +54,20 @@ def home_page():
 
 @app.route('/values')
 def values_page():
-    """Serve value_page"""
+    """Serve values_page"""
     log_access()
-    return send_from_directory('value_page', 'values.html')
+    return send_from_directory('values_page', 'values.html')
 
 # Routes pour servir les fichiers statiques spécifiques
 @app.route('/home_page/<path:filename>')
 def serve_home_files(filename):
     """Serve home_page static files"""
     return send_from_directory('home_page', filename)
+
+@app.route('/values_page/<path:filename>')
+def serve_values_files(filename):
+    """Serve values_page static files"""
+    return send_from_directory('values_page', filename)
 
 @app.route('/pictures/<path:filename>')
 def serve_pictures(filename):
@@ -76,7 +81,7 @@ def serve_files(filename):
         # Rediriger les accès directs vers les URLs propres
         if filename == 'home_page/home.html':
             return redirect('/home', code=301)
-        elif filename == 'value_page/values.html':
+        elif filename == 'values_page/values.html':
             return redirect('/values', code=301)
         elif filename.startswith('home_page'):
             return redirect('/home', code=301)
