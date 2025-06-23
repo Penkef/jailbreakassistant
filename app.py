@@ -29,8 +29,8 @@ def get_site_info():
 def force_https():
     """Force HTTPS in production"""
     if not request.is_secure and request.headers.get('X-Forwarded-Proto') != 'https':
-        if 'replit.dev' in request.host:
-            return redirect(request.url.replace('http://', 'https://'))
+        if 'replit.dev' in request.host or 'jailbreakassistant.xyz' in request.host:
+            return redirect(request.url.replace('http://', 'https://'), code=301)
 
 @app.after_request
 def after_request(response):
@@ -63,21 +63,30 @@ def serve_values_files(filename):
     """Serve Values Page static files"""
     return send_from_directory('Values Page', filename)
 
+# Routes pour servir les fichiers statiques spécifiques
+@app.route('/Home Page/<path:filename>')
+def serve_home_files(filename):
+    """Serve Home Page static files"""
+    return send_from_directory('Home Page', filename)
+
+@app.route('/pictures/<path:filename>')
+def serve_pictures(filename):
+    """Serve pictures"""
+    return send_from_directory('pictures', filename)
+
 @app.route('/<path:filename>')
 def serve_files(filename):
-    """Serve static files"""
+    """Serve static files and redirect old URLs"""
     try:
         # Rediriger les accès directs vers les URLs propres
         if filename == 'Home Page/home.html':
-            return redirect('/home')
+            return redirect('/home', code=301)
         elif filename == 'Values Page/values.html':
-            return redirect('/values')
+            return redirect('/values', code=301)
         elif filename.startswith('Home Page/'):
-            return send_from_directory('Home Page', filename[10:])
+            return redirect('/home', code=301)
         elif filename.startswith('Values Page/'):
-            return send_from_directory('Values Page', filename[12:])
-        elif filename.startswith('pictures/'):
-            return send_from_directory('pictures', filename[9:])
+            return redirect('/values', code=301)
         else:
             return send_from_directory('.', filename)
     except:
