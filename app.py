@@ -78,9 +78,9 @@ def serve_files(filename):
             return redirect('/home', code=301)
         elif filename == 'Values Page/values.html':
             return redirect('/values', code=301)
-        elif filename.startswith('Home Page/'):
+        elif filename.startswith('home_page'):
             return redirect('/home', code=301)
-        elif filename.startswith('Values Page/'):
+        elif filename.startswith('values_page/'):
             return redirect('/values', code=301)
         else:
             return send_from_directory('.', filename)
