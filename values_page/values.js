@@ -1,4 +1,3 @@
-
 // Jailbreak Assistant - Values Page Script
 console.log('Jailbreak Assistant Values Page loaded successfully!');
 
@@ -16,7 +15,7 @@ function setupSearchFunctionality() {
     if (searchInput) {
         searchInput.addEventListener('input', function() {
             const searchTerm = this.value.toLowerCase().trim();
-            
+
             // Créer une liste des éléments correspondants
             const matchingCards = [];
             const nonMatchingCards = [];
@@ -24,7 +23,7 @@ function setupSearchFunctionality() {
             itemCards.forEach(card => {
                 const itemName = card.getAttribute('data-name').toLowerCase();
                 const itemTitle = card.querySelector('h3').textContent.toLowerCase();
-                
+
                 const matches = searchTerm === '' || 
                                itemName.includes(searchTerm) || 
                                itemTitle.includes(searchTerm);
@@ -38,7 +37,7 @@ function setupSearchFunctionality() {
 
             // Réorganiser la grille
             reorganizeGrid(matchingCards, nonMatchingCards, itemsGrid);
-            
+
             currentSearchTerm = searchTerm;
             console.log(`Recherche: "${searchTerm}"`);
         });
@@ -56,53 +55,56 @@ function setupSearchFunctionality() {
 }
 
 function reorganizeGrid(matchingCards, nonMatchingCards, itemsGrid) {
-    // Cacher les éléments non correspondants avec animation
+    // Animation de sortie par la droite pour les éléments non correspondants
     nonMatchingCards.forEach((card, index) => {
-        setTimeout(() => {
-            card.style.opacity = '0';
-            card.style.transform = 'scale(0.8) translateY(-20px)';
-            card.style.transition = 'all 0.4s ease';
-            
+        if (card.style.display !== 'none') {
             setTimeout(() => {
-                card.style.display = 'none';
-            }, 400);
-        }, index * 30);
+                card.style.opacity = '0';
+                card.style.transform = 'translateX(150%) rotateY(90deg) scale(0.8)';
+                card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+
+                setTimeout(() => {
+                    card.style.display = 'none';
+                    // Repositionner pour l'entrée par la gauche
+                    card.style.transform = 'translateX(-150%) rotateY(-90deg) scale(0.8)';
+                }, 600);
+            }, index * 50);
+        }
     });
 
-    // Réorganiser et afficher les éléments correspondants
+    // Animation d'entrée par la gauche pour les éléments correspondants
     setTimeout(() => {
-        // Retirer tous les éléments de la grille
-        Array.from(itemsGrid.children).forEach(card => {
-            if (nonMatchingCards.includes(card)) {
-                itemsGrid.removeChild(card);
-            }
+        // Réorganiser la grille
+        const allCards = Array.from(itemsGrid.children);
+        const sortedCards = [...matchingCards, ...nonMatchingCards];
+
+        // Réorganiser dans l'ordre voulu
+        sortedCards.forEach(card => {
+            itemsGrid.appendChild(card);
         });
 
-        // Réinsérer les éléments correspondants dans l'ordre
+        // Animer l'entrée des éléments correspondants
         matchingCards.forEach((card, index) => {
-            card.style.display = 'block';
-            card.style.opacity = '0';
-            card.style.transform = 'scale(0.8) translateY(20px)';
-            
-            if (!itemsGrid.contains(card)) {
-                itemsGrid.appendChild(card);
+            if (card.style.display === 'none') {
+                card.style.display = 'block';
+                card.style.opacity = '0';
+                card.style.transform = 'translateX(-150%) rotateY(-90deg) scale(0.8)';
             }
-            
+
             setTimeout(() => {
                 card.style.opacity = '1';
-                card.style.transform = 'scale(1) translateY(0)';
-                card.style.transition = 'all 0.4s ease';
-            }, index * 50);
+                card.style.transform = 'translateX(0) rotateY(0deg) scale(1)';
+                card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            }, index * 80 + 300);
         });
 
-        // Réinsérer les éléments cachés à la fin (mais cachés)
+        // Réinitialiser les éléments cachés
         nonMatchingCards.forEach(card => {
-            if (!itemsGrid.contains(card)) {
-                itemsGrid.appendChild(card);
-                card.style.display = 'none';
-            }
+            card.style.display = 'none';
+            card.style.opacity = '0';
+            card.style.transform = 'translateX(-150%) rotateY(-90deg) scale(0.8)';
         });
-    }, 200);
+    }, 400);
 }
 
 // Animation du titre VALUES
@@ -173,15 +175,10 @@ function setupMobileNavigation() {
     }
 }
 
-// Effet de parallaxe léger pour la bannière
+// Effet de parallaxe léger pour la bannière - DÉSACTIVÉ pour éviter les problèmes de scaling
 function setupParallaxEffect() {
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const banner = document.querySelector('.banner');
-        if (banner) {
-            banner.style.transform = `translateY(${scrolled * 0.3}px)`;
-        }
-    });
+    // Parallax désactivé pour éviter les conflits avec le scaling des cartes
+    console.log('Parallax effect disabled to prevent scaling conflicts');
 }
 
 // Initialize when page loads
