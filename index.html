@@ -6,16 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jailbreak Assistant</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
-    <script>
-        // Redirection automatique vers la route Flask /home
-        window.location.href = '/home';
-    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Jailbreak Assistant</h1>
-        <p>Redirection en cours...</p>
-        <p>Si vous n'êtes pas redirigé automatiquement, <a href="home_page/home.html" style="color: #FFD700;">cliquez ici</a></p>
+    <nav class="navigation-bar">
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="values_page/values.html">Values</a>
+            <a href="index.html">History</a>
+            <a href="index.html">Dupe List</a>
+        </div>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        <div class="mobile-nav-menu" id="mobileNavMenu">
+            <a href="index.html" class="active">Home</a>
+            <a href="values_page/values.html">Values</a>
+            <a href="index.html">History</a>
+            <a href="index.html">Dupe List</a>
+        </div>
+    </nav>
+
+    <div class="banner">
+        <img src="pictures/Jailbreak Assistant Banner.png" alt="Jailbreak Assistant Banner" class="banner-image">
     </div>
+    <div class="container">
+        <h1></h1> <!-- Empty h1 for the animation -->
+        <p>Welcome to www.jailbreakassistant.xyz</p>
+        <p>Coming Soon...</p>
+        <div class="features">
+            <div class="feature-card" data-feature="values">
+                <img src="pictures/Value.png" alt="Values">
+            </div>
+            <div class="feature-card" data-feature="dupe-finder">
+                <img src="pictures/Value History.png" alt="Dupe Finder">
+            </div>
+            <div class="feature-card" data-feature="community">
+                <img src="pictures/Value History.png" alt="Community">
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="social-icons">
+                <a href="#" class="social-icon">
+                    <img src="pictures/Reddit Icon.png" alt="Reddit">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="pictures/Discord Icon.png" alt="Discord">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="pictures/Youtube Icon Follow Us.webp" alt="YouTube">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="pictures/Discord Icon Follow Us.png" alt="Discord Follow">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="pictures/Wiki Icon.png" alt="Wiki">
+                </a>
+                <a href="#" class="social-icon">
+                    <img src="pictures/Bot Icon.png" alt="Bot">
+                </a>
+            </div>
+            <p class="last-modified">Dernière modification: <span id="lastModified">2024</span></p>
+        </div>
+    </footer>
+
+    <script src="home_page/home.js"></script>
 </body>
 </html>
