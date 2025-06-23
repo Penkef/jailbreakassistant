@@ -1,0 +1,46 @@
+💡 Replit AI – Problèmes visuels et améliorations à appliquer sur la page Values
+🟥 1. Problème de carte coupée à droite
+Contexte :
+La carte contenant les items (celle où s’affichent les véhicules) n’est pas équilibrée entre la gauche et la droite.
+
+Bug constaté :
+Sur PC comme sur mobile, le côté droit est coupé :
+
+On voit clairement que la bordure arrondie droite est tronquée,
+
+Comme si toute une ligne verticale à droite n’était pas affichée (padding ou overflow incorrect ?).
+
+Ce que je veux :
+La carte doit être parfaitement centrée et visible, sans débordement ni bordure coupée.
+Elle doit respecter les arrondis à gauche ET à droite, quel que soit le format.
+
+🌈 2. Effet lumineux dynamique derrière les véhicules selon leur rareté
+Idée :
+Je souhaite ajouter un effet de lumière animée ou "énergétique" derrière chaque image de véhicule, en fonction de sa rareté.
+
+Comportement attendu :
+
+Il s’agit d’un dégradé animé ou d’une aura colorée.
+
+Chaque type de rareté a sa propre couleur dominante, mais en plusieurs variantes douces :
+
+Pour les véhicules "Clean" et "Dupe", je souhaite un fond rouge clair, avec des teintes variées de rouge animées de façon fluide, rêveuse, presque comme un effet de pulsation légère ou vague.
+
+Pour les véhicules verts (autre rareté), il faut un effet similaire avec plusieurs teintes de vert très légèrement différentes, qui changent lentement.
+
+Idem pour les autres raretés (par exemple : violet, bleu, jaune...) : chaque rareté aurait une palette douce et animée correspondant à son thème.
+
+Inspiration visuelle :
+Un effet "neon dreamy glow", comme un halo animé en fond, mais discret et élégant.
+
+🎯 Résumé des attentes :
+✅ Corriger le décalage à droite de la carte contenant les items (arrondis visibles et carte centrée).
+
+✅ Ajouter un fond lumineux animé, lié à la rareté du véhicule, derrière chaque image :
+
+Couleurs en dégradés doux (ex : plusieurs rouges pour "dupe", plusieurs verts pour "rare"...),
+
+Effet animé fluide et cyclique (comme un rêve ou une lumière qui respire),
+
+Fond appliqué seulement à la zone de l’image.
+
