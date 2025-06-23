@@ -301,7 +301,7 @@ p {
 }
 
 .values-item-card {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(68, 68, 255, 0.15);
     border-radius: 20px;
     padding: 0;
     border: 2px solid rgba(68, 68, 255, 0.4);
@@ -366,16 +366,17 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(68, 68, 255, 0.1);
     width: 100%;
     aspect-ratio: 1;
     overflow: hidden;
+    border-bottom: 2px solid rgba(68, 68, 255, 0.4);
 }
 
 .item-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border: 3px solid rgba(255, 255, 255, 0.8);
     border-radius: 0;
     padding: 0;
@@ -443,7 +444,7 @@ p {
 
 .values-item-card:hover {
     transform: translateY(-8px) scale(1.03);
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(68, 68, 255, 0.25);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     border-color: rgba(68, 68, 255, 0.8);
 }
