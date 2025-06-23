@@ -42,37 +42,27 @@ def after_request(response):
 
 @app.route('/')
 def home():
-    """Redirect to home_page"""
+    """Redirect to home page"""
     log_access()
     return redirect('/home')
 
 @app.route('/home')
 def home_page():
-    """Serve home_page"""
+    """Serve home page"""
     log_access()
-    return send_from_directory('home_page', 'home.html')
+    return send_from_directory('Home Page', 'home.html')
 
 @app.route('/values')
 def values_page():
-    """Serve values_page"""
+    """Serve values page"""
     log_access()
-    return send_from_directory('values_page', 'values.html')
-
-@app.route('/home_page/home.html')
-def legacy_home_redirect():
-    """Redirect legacy home URL to clean URL"""
-    return redirect('/home', code=301)
-
-@app.route('/values_page/values.html')
-def legacy_values_redirect():
-    """Redirect legacy values URL to clean URL"""
-    return redirect('/values', code=301)
+    return send_from_directory('Values Page', 'values.html')
 
 # Routes pour servir les fichiers statiques spécifiques
-@app.route('/home_page/<path:filename>')
+@app.route('/Home Page/<path:filename>')
 def serve_home_files(filename):
-    """Serve home_page static files"""
-    return send_from_directory('home_page', filename)
+    """Serve Home Page static files"""
+    return send_from_directory('Home Page', filename)
 
 @app.route('/pictures/<path:filename>')
 def serve_pictures(filename):
@@ -84,22 +74,14 @@ def serve_files(filename):
     """Serve static files and redirect old URLs"""
     try:
         # Rediriger les accès directs vers les URLs propres
-        if filename == 'home_page/home.html':
+        if filename == 'Home Page/home.html':
             return redirect('/home', code=301)
-        elif filename == 'values_page/values.html':
+        elif filename == 'Values Page/values.html':
             return redirect('/values', code=301)
-        elif filename.startswith('home_page/'):
-            # Servir les fichiers CSS/JS de home_page
-            if filename.endswith(('.css', '.js')):
-                return send_from_directory('.', filename)
-            else:
-                return redirect('/home', code=301)
+        elif filename.startswith('home_page'):
+            return redirect('/home', code=301)
         elif filename.startswith('values_page/'):
-            # Servir les fichiers CSS/JS de values_page
-            if filename.endswith(('.css', '.js')):
-                return send_from_directory('.', filename)
-            else:
-                return redirect('/values', code=301)
+            return redirect('/values', code=301)
         else:
             return send_from_directory('.', filename)
     except:
@@ -110,7 +92,7 @@ if __name__ == "__main__":
     print("🔄 Synchronisation automatique avec GitHub...")
     sync_with_github()
     print()
-
+    
     # Lancement du serveur web
     info = get_site_info()
     print(f"=== {info['name']} ===")
@@ -121,6 +103,6 @@ if __name__ == "__main__":
     print("🌐 Serveur web démarré sur http://0.0.0.0:5000")
     print()
     verify_sync_status()
-
+    
     # Démarrer le serveur Flask
     app.run(host='0.0.0.0', port=5000, debug=True, threaded=True, use_reloader=False)
