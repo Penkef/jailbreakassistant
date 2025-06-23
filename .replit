@@ -10,7 +10,7 @@ publicDir = "/"
 deploymentTarget = "static"
 
 [workflows]
-runButton = "Run"
+runButton = "Run Flask Server"
 
 [[workflows.workflow]]
 name = "Serve static"
@@ -33,6 +33,15 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "static-web-server -w ./.config/static-web-server.toml"
+
+[[workflows.workflow]]
+name = "Run Flask Server"
+author = 44183857
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python3 app.py"
 
 [[ports]]
 localPort = 80
