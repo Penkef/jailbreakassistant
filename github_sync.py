@@ -32,7 +32,8 @@ def get_all_local_files():
         '*.pyc',
         '*.pyo',
         '*.tmp',
-        'attached_assets'
+        'attached_assets',
+        '.cache'
     ]
 
     all_files = []
