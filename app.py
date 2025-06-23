@@ -58,11 +58,6 @@ def values_page():
     log_access()
     return send_from_directory('Values Page', 'values.html')
 
-@app.route('/Values Page/<path:filename>')
-def serve_values_files(filename):
-    """Serve Values Page static files"""
-    return send_from_directory('Values Page', filename)
-
 # Routes pour servir les fichiers statiques spécifiques
 @app.route('/Home Page/<path:filename>')
 def serve_home_files(filename):
