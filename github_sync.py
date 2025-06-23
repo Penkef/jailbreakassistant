@@ -24,16 +24,31 @@ def backup_local_files():
     backup_dir = f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
     
     files_to_backup = [
-        'Home Page/home.html',
-        'Home Page/home.css', 
-        'Home Page/home.js',
-        'Values Page/values.html',
-        'Values Page/values.css',
-        'Values Page/values.js',
+        'home_page/home.html',
+        'home_page/home.css', 
+        'home_page/home.js',
+        'values_page/values.html',
+        'values_page/values.css',
+        'values_page/values.js',
         'app.py',
         'github_sync.py',
         '.replit',
-        'requirements.txt'
+        'requirements.txt',
+        'pictures/Beignet.webp',
+        'pictures/Bot Icon.png',
+        'pictures/Discord Icon.png',
+        'pictures/Discord_Icon_Follow_Us.png',
+        'pictures/Jailbreak_Assistant_Banner.png',
+        'pictures/Reddit Icon.png',
+        'pictures/Torpedo.webp',
+        'pictures/Value History.png',
+        'pictures/Value.png',
+        'pictures/Wiki Icon.png',
+        'pictures/Youtube_Icon_Follow_Us.webp',
+        'index.html',
+        'style.css',
+        'script.js',
+        'CNAME'
     ]
     
     backup_created = False
@@ -98,17 +113,31 @@ def pull_from_github(force=False):
         backup_dir = backup_local_files() if not force else None
 
         files_to_pull = [
-            'Home Page/home.html',
-            'Home Page/home.css', 
-            'Home Page/home.js',
-            'Values Page/values.html',
-            'Values Page/values.css',
-            'Values Page/values.js',
+            'home_page/home.html',
+            'home_page/home.css', 
+            'home_page/home.js',
+            'values_page/values.html',
+            'values_page/values.css',
+            'values_page/values.js',
             'app.py',
             'github_sync.py',
             '.replit',
             'requirements.txt',
-            'pictures/README.md'
+            'pictures/Beignet.webp',
+            'pictures/Bot Icon.png',
+            'pictures/Discord Icon.png',
+            'pictures/Discord_Icon_Follow_Us.png',
+            'pictures/Jailbreak_Assistant_Banner.png',
+            'pictures/Reddit Icon.png',
+            'pictures/Torpedo.webp',
+            'pictures/Value History.png',
+            'pictures/Value.png',
+            'pictures/Wiki Icon.png',
+            'pictures/Youtube_Icon_Follow_Us.webp',
+            'index.html',
+            'style.css',
+            'script.js',
+            'CNAME'
         ]
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -235,16 +264,31 @@ def sync_with_github():
             return False
 
         files_to_sync = [
-            'Home Page/home.html',
-            'Home Page/home.css', 
-            'Home Page/home.js',
-            'Values Page/values.html',
-            'Values Page/values.css',
-            'Values Page/values.js',
+            'home_page/home.html',
+            'home_page/home.css', 
+            'home_page/home.js',
+            'values_page/values.html',
+            'values_page/values.css',
+            'values_page/values.js',
             'app.py',
             'github_sync.py',
             '.replit',
-            'requirements.txt'
+            'requirements.txt',
+            'pictures/Beignet.webp',
+            'pictures/Bot Icon.png',
+            'pictures/Discord Icon.png',
+            'pictures/Discord_Icon_Follow_Us.png',
+            'pictures/Jailbreak_Assistant_Banner.png',
+            'pictures/Reddit Icon.png',
+            'pictures/Torpedo.webp',
+            'pictures/Value History.png',
+            'pictures/Value.png',
+            'pictures/Wiki Icon.png',
+            'pictures/Youtube_Icon_Follow_Us.webp',
+            'index.html',
+            'style.css',
+            'script.js',
+            'CNAME'
         ]
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -350,8 +394,10 @@ def verify_sync_status():
     print("Fichiers surveillés:")
     print("  • Home Page (HTML, CSS, JS)")
     print("  • Values Page (HTML, CSS, JS)")
+    print("  • Pictures (Images et assets)")
     print("  • Backend (app.py, github_sync.py)")
     print("  • Configuration (.replit, requirements.txt)")
+    print("  • Fichiers racine (index.html, style.css, script.js, CNAME)")
     
     if github_repo and github_token:
         print("Status: ✅ Configuration complète")
