@@ -24,12 +24,12 @@ def backup_local_files():
     backup_dir = f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
     
     files_to_backup = [
-        'Home Page/home.html',
-        'Home Page/home.css', 
-        'Home Page/home.js',
-        'Values Page/values.html',
-        'Values Page/values.css',
-        'Values Page/values.js',
+        'home_page/home.html',
+        'home_page/home.css', 
+        'home_page/home.js',
+        'values_page/values.html',
+        'values_page/values.css',
+        'values_page/values.js',
         'app.py',
         'github_sync.py',
         '.replit',
@@ -98,12 +98,12 @@ def pull_from_github(force=False):
         backup_dir = backup_local_files() if not force else None
 
         files_to_pull = [
-            'Home Page/home.html',
-            'Home Page/home.css', 
-            'Home Page/home.js',
-            'Values Page/values.html',
-            'Values Page/values.css',
-            'Values Page/values.js',
+            'home_page/home.html',
+            'home_page/home.css', 
+            'home_page/home.js',
+            'values_page/values.html',
+            'values_page/values.css',
+            'values_page/values.js',
             'app.py',
             'github_sync.py',
             '.replit',
@@ -235,12 +235,12 @@ def sync_with_github():
             return False
 
         files_to_sync = [
-            'Home Page/home.html',
-            'Home Page/home.css', 
-            'Home Page/home.js',
-            'Values Page/values.html',
-            'Values Page/values.css',
-            'Values Page/values.js',
+            'home_page/home.html',
+            'home_page/home.css', 
+            'home_page/home.js',
+            'values_page/values.html',
+            'values_page/values.css',
+            'values_page/values.js',
             'app.py',
             'github_sync.py',
             '.replit',
@@ -348,8 +348,8 @@ def verify_sync_status():
     print(f"Branche: {github_branch}")
     print(f"Token GitHub: {'✅ Configuré' if github_token else '❌ Non configuré'}")
     print("Fichiers surveillés:")
-    print("  • Home Page (HTML, CSS, JS)")
-    print("  • Values Page (HTML, CSS, JS)")
+    print("  • home_page (HTML, CSS, JS)")
+    print("  • values_page (HTML, CSS, JS)")
     print("  • Backend (app.py, github_sync.py)")
     print("  • Configuration (.replit, requirements.txt)")
     
