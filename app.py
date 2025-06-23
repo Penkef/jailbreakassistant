@@ -44,9 +44,6 @@ def after_request(response):
 def home():
     """Redirect to home page"""
     log_access()
-    # Synchronisation automatique à chaque accès à la page d'accueil
-    print("🔄 Synchronisation automatique avec GitHub...")
-    sync_with_github()
     return redirect('/home')
 
 @app.route('/home')
@@ -66,6 +63,11 @@ def values_page():
 def serve_home_files(filename):
     """Serve Home Page static files"""
     return send_from_directory('home_page', filename)
+
+@app.route('/values_page/<path:filename>')
+def serve_values_files(filename):
+    """Serve Values Page static files"""
+    return send_from_directory('values_page', filename)
 
 @app.route('/pictures/<path:filename>')
 def serve_pictures(filename):
@@ -91,8 +93,8 @@ def serve_files(filename):
         return redirect('/home')
 
 if __name__ == "__main__":
-    # Synchronisation automatique à chaque lancement
-    print("🔄 Synchronisation automatique avec GitHub...")
+    # Synchronisation automatique uniquement au lancement
+    print("🔄 Synchronisation automatique avec GitHub au démarrage...")
     sync_with_github()
     print()
     
