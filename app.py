@@ -58,6 +58,16 @@ def values_page():
     log_access()
     return send_from_directory('values_page', 'values.html')
 
+@app.route('/home_page/home.html')
+def legacy_home_redirect():
+    """Redirect legacy home URL to clean URL"""
+    return redirect('/home', code=301)
+
+@app.route('/values_page/values.html')
+def legacy_values_redirect():
+    """Redirect legacy values URL to clean URL"""
+    return redirect('/values', code=301)
+
 # Routes pour servir les fichiers statiques spécifiques
 @app.route('/home_page/<path:filename>')
 def serve_home_files(filename):
@@ -100,7 +110,7 @@ if __name__ == "__main__":
     print("🔄 Synchronisation automatique avec GitHub...")
     sync_with_github()
     print()
-    
+
     # Lancement du serveur web
     info = get_site_info()
     print(f"=== {info['name']} ===")
@@ -111,6 +121,6 @@ if __name__ == "__main__":
     print("🌐 Serveur web démarré sur http://0.0.0.0:5000")
     print()
     verify_sync_status()
-    
+
     # Démarrer le serveur Flask
     app.run(host='0.0.0.0', port=5000, debug=True, threaded=True, use_reloader=False)
