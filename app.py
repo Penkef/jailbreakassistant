@@ -78,10 +78,18 @@ def serve_files(filename):
             return redirect('/home', code=301)
         elif filename == 'values_page/values.html':
             return redirect('/values', code=301)
-        elif filename.startswith('home_page'):
-            return redirect('/home', code=301)
+        elif filename.startswith('home_page/'):
+            # Servir les fichiers CSS/JS de home_page
+            if filename.endswith(('.css', '.js')):
+                return send_from_directory('.', filename)
+            else:
+                return redirect('/home', code=301)
         elif filename.startswith('values_page/'):
-            return redirect('/values', code=301)
+            # Servir les fichiers CSS/JS de values_page
+            if filename.endswith(('.css', '.js')):
+                return send_from_directory('.', filename)
+            else:
+                return redirect('/values', code=301)
         else:
             return send_from_directory('.', filename)
     except:
