@@ -86,9 +86,9 @@ if __name__ == "__main__":
     print(f"Status: {info['status']}")
     print(f"Version: {info['version']}")
     print("\nSynchronisation automatique activée ✅")
-    print("🌐 Serveur web démarré sur http://0.0.0.0:3000")
+    print("🌐 Serveur web démarré sur http://0.0.0.0:5000")
     print()
     verify_sync_status()
     
     # Démarrer le serveur Flask
-    app.run(host='0.0.0.0', port=3000, debug=True, threaded=True, use_reloader=False)
+    app.run(host='0.0.0.0', port=5000, debug=True, threaded=True, use_reloader=False)
