@@ -67,7 +67,12 @@ def serve_values_files(filename):
 def serve_files(filename):
     """Serve static files"""
     try:
-        if filename.startswith('Home Page/'):
+        # Rediriger les accès directs vers les URLs propres
+        if filename == 'Home Page/home.html':
+            return redirect('/home')
+        elif filename == 'Values Page/values.html':
+            return redirect('/values')
+        elif filename.startswith('Home Page/'):
             return send_from_directory('Home Page', filename[10:])
         elif filename.startswith('Values Page/'):
             return send_from_directory('Values Page', filename[12:])
@@ -76,7 +81,7 @@ def serve_files(filename):
         else:
             return send_from_directory('.', filename)
     except:
-        return redirect('/Home Page/home.html')
+        return redirect('/home')
 
 if __name__ == "__main__":
     # Synchronisation automatique à chaque lancement
