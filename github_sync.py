@@ -23,7 +23,11 @@ def backup_local_files():
     """Créer une sauvegarde des fichiers locaux avant extraction"""
     backup_dir = f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
     
-    files_to_backup = [
+    # Découverte automatique de tous les fichiers à sauvegarder
+    files_to_backup = []
+    
+    # Fichiers de base
+    base_files = [
         'home_page/home.html',
         'home_page/home.css', 
         'home_page/home.js',
@@ -34,22 +38,26 @@ def backup_local_files():
         'github_sync.py',
         '.replit',
         'requirements.txt',
-        'pictures/Beignet.webp',
-        'pictures/Bot Icon.png',
-        'pictures/Discord Icon.png',
-        'pictures/Discord_Icon_Follow_Us.png',
-        'pictures/Jailbreak_Assistant_Banner.png',
-        'pictures/Reddit Icon.png',
-        'pictures/Torpedo.webp',
-        'pictures/Value History.png',
-        'pictures/Value.png',
-        'pictures/Wiki Icon.png',
-        'pictures/Youtube_Icon_Follow_Us.webp',
         'index.html',
         'style.css',
         'script.js',
         'CNAME'
     ]
+    files_to_backup.extend(base_files)
+    
+    # Ajouter tous les fichiers dans pictures
+    if os.path.exists('pictures'):
+        for root, dirs, files in os.walk('pictures'):
+            for file in files:
+                file_path = os.path.join(root, file).replace('\\', '/')
+                files_to_backup.append(file_path)
+    
+    # Ajouter tous les fichiers dans attached_assets
+    if os.path.exists('attached_assets'):
+        for root, dirs, files in os.walk('attached_assets'):
+            for file in files:
+                file_path = os.path.join(root, file).replace('\\', '/')
+                files_to_backup.append(file_path)
     
     backup_created = False
     
@@ -112,7 +120,29 @@ def pull_from_github(force=False):
         # Créer une sauvegarde avant extraction
         backup_dir = backup_local_files() if not force else None
 
-        files_to_pull = [
+        # Fonction pour obtenir tous les fichiers du repository GitHub
+        def get_all_repo_files():
+            """Obtenir la liste de tous les fichiers du repository GitHub"""
+            try:
+                api_url = f"https://api.github.com/repos/{github_repo}/git/trees/{github_branch}?recursive=1"
+                response = requests.get(api_url, headers=headers, timeout=15)
+                
+                if response.status_code == 200:
+                    tree_data = response.json()
+                    files = []
+                    for item in tree_data.get('tree', []):
+                        if item['type'] == 'blob':  # Fichier (pas dossier)
+                            files.append(item['path'])
+                    return files
+                else:
+                    print(f"⚠️ Impossible d'obtenir la liste des fichiers: {response.status_code}")
+                    return []
+            except Exception as e:
+                print(f"⚠️ Erreur lors de la récupération des fichiers: {str(e)}")
+                return []
+        
+        # Fichiers de base à toujours vérifier
+        base_files = [
             'home_page/home.html',
             'home_page/home.css', 
             'home_page/home.js',
@@ -123,22 +153,20 @@ def pull_from_github(force=False):
             'github_sync.py',
             '.replit',
             'requirements.txt',
-            'pictures/Beignet.webp',
-            'pictures/Bot Icon.png',
-            'pictures/Discord Icon.png',
-            'pictures/Discord_Icon_Follow_Us.png',
-            'pictures/Jailbreak_Assistant_Banner.png',
-            'pictures/Reddit Icon.png',
-            'pictures/Torpedo.webp',
-            'pictures/Value History.png',
-            'pictures/Value.png',
-            'pictures/Wiki Icon.png',
-            'pictures/Youtube_Icon_Follow_Us.webp',
             'index.html',
             'style.css',
             'script.js',
             'CNAME'
         ]
+        
+        # Obtenir tous les fichiers du repository
+        all_repo_files = get_all_repo_files()
+        
+        # Combiner fichiers de base avec tous les fichiers du repo
+        files_to_pull = base_files.copy()
+        for file_path in all_repo_files:
+            if file_path not in files_to_pull:
+                files_to_pull.append(file_path)
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         files_downloaded = 0
@@ -263,7 +291,8 @@ def sync_with_github():
             print(f"❌ Connexion GitHub impossible: {str(e)}")
             return False
 
-        files_to_sync = [
+        # Fichiers statiques de base
+        base_files = [
             'home_page/home.html',
             'home_page/home.css', 
             'home_page/home.js',
@@ -274,22 +303,30 @@ def sync_with_github():
             'github_sync.py',
             '.replit',
             'requirements.txt',
-            'pictures/Beignet.webp',
-            'pictures/Bot Icon.png',
-            'pictures/Discord Icon.png',
-            'pictures/Discord_Icon_Follow_Us.png',
-            'pictures/Jailbreak_Assistant_Banner.png',
-            'pictures/Reddit Icon.png',
-            'pictures/Torpedo.webp',
-            'pictures/Value History.png',
-            'pictures/Value.png',
-            'pictures/Wiki Icon.png',
-            'pictures/Youtube_Icon_Follow_Us.webp',
             'index.html',
             'style.css',
             'script.js',
             'CNAME'
         ]
+        
+        # Découverte automatique des fichiers dans pictures
+        picture_files = []
+        if os.path.exists('pictures'):
+            for root, dirs, files in os.walk('pictures'):
+                for file in files:
+                    file_path = os.path.join(root, file).replace('\\', '/')
+                    picture_files.append(file_path)
+        
+        # Découverte automatique des nouveaux fichiers dans attached_assets
+        attached_files = []
+        if os.path.exists('attached_assets'):
+            for root, dirs, files in os.walk('attached_assets'):
+                for file in files:
+                    file_path = os.path.join(root, file).replace('\\', '/')
+                    attached_files.append(file_path)
+        
+        # Combinaison de tous les fichiers
+        files_to_sync = base_files + picture_files + attached_files
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         files_updated = 0
@@ -391,13 +428,27 @@ def verify_sync_status():
     print(f"Repository: {github_repo if github_repo else '❌ Non configuré'}")
     print(f"Branche: {github_branch}")
     print(f"Token GitHub: {'✅ Configuré' if github_token else '❌ Non configuré'}")
+    # Compter les fichiers surveillés
+    picture_count = 0
+    if os.path.exists('pictures'):
+        for root, dirs, files in os.walk('pictures'):
+            picture_count += len(files)
+    
+    attached_count = 0
+    if os.path.exists('attached_assets'):
+        for root, dirs, files in os.walk('attached_assets'):
+            attached_count += len(files)
+    
     print("Fichiers surveillés:")
     print("  • Home Page (HTML, CSS, JS)")
     print("  • Values Page (HTML, CSS, JS)")
-    print("  • Pictures (Images et assets)")
+    print(f"  • Pictures ({picture_count} fichiers détectés automatiquement)")
+    if attached_count > 0:
+        print(f"  • Attached Assets ({attached_count} fichiers détectés)")
     print("  • Backend (app.py, github_sync.py)")
     print("  • Configuration (.replit, requirements.txt)")
     print("  • Fichiers racine (index.html, style.css, script.js, CNAME)")
+    print(f"  • Total estimé: {14 + picture_count + attached_count} fichiers")
     
     if github_repo and github_token:
         print("Status: ✅ Configuration complète")
