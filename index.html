@@ -7,13 +7,8 @@
     <title>Jailbreak Assistant</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script>
-        // Redirection automatique vers la page home pour GitHub Pages
-        if (window.location.hostname.includes('github.io')) {
-            window.location.href = 'home_page/home.html';
-        } else {
-            // Pour Replit
-            window.location.href = 'home_page/home.html';
-        }
+        // Redirection automatique vers la route Flask /home
+        window.location.href = '/home';
     </script>
 </head>
 <body>
