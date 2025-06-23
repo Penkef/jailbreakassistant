@@ -24,12 +24,12 @@ def backup_local_files():
     backup_dir = f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
     files_to_backup = [
-        'Home Page/home.html',
-        'Home Page/home.css', 
-        'Home Page/home.js',
-        'Values Page/values.html',
-        'Values Page/values.css',
-        'Values Page/values.js',
+        'home_page/home.html',
+        'home_page/home.css', 
+        'home_page/home.js',
+        'values_page/values.html',
+        'values_page/values.css',
+        'values_page/values.js',
         'app.py',
         'github_sync.py',
         '.replit',
