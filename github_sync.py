@@ -19,79 +19,22 @@ def get_file_hash(file_path):
     except:
         return None
 
-def get_all_local_files():
-    """Obtenir tous les fichiers locaux à synchroniser (exclut les fichiers temporaires et caches)"""
-    excluded_patterns = [
-        '__pycache__',
-        '.git',
-        'node_modules',
-        '.env',
-        'access.log',
-        'backup_*',
-        '.DS_Store',
-        '*.pyc',
-        '*.pyo',
-        '*.tmp',
-        'attached_assets',
-        '.cache'
-    ]
-
-    all_files = []
-
-    for root, dirs, files in os.walk('.'):
-        # Filtrer les dossiers à exclure
-        dirs[:] = [d for d in dirs if not any(pattern in d for pattern in excluded_patterns)]
-
-        for file in files:
-            file_path = os.path.join(root, file)[2:]  # Retirer le './' du début
-
-            # Exclure les fichiers selon les patterns
-            if not any(pattern.replace('*', '') in file_path for pattern in excluded_patterns):
-                all_files.append(file_path)
-
-    return sorted(all_files)
-
-def get_all_github_files(repo, branch, headers):
-    """Obtenir tous les fichiers du repository GitHub de manière récursive"""
-    all_files = []
-
-    def get_tree_recursive(tree_sha):
-        """Récupérer l'arbre des fichiers de manière récursive"""
-        tree_url = f"https://api.github.com/repos/{repo}/git/trees/{tree_sha}?recursive=1"
-
-        try:
-            response = requests.get(tree_url, headers=headers, timeout=15)
-            if response.status_code == 200:
-                tree_data = response.json()
-                for item in tree_data.get('tree', []):
-                    if item['type'] == 'blob':  # C'est un fichier
-                        all_files.append(item['path'])
-        except Exception as e:
-            print(f"Erreur lors de la récupération de l'arbre: {e}")
-
-    try:
-        # Obtenir le SHA du commit le plus récent
-        commits_url = f"https://api.github.com/repos/{repo}/commits/{branch}"
-        response = requests.get(commits_url, headers=headers, timeout=10)
-
-        if response.status_code == 200:
-            commit_data = response.json()
-            tree_sha = commit_data['commit']['tree']['sha']
-            get_tree_recursive(tree_sha)
-        else:
-            print(f"Erreur lors de la récupération des commits: {response.status_code}")
-
-    except Exception as e:
-        print(f"Erreur lors de la récupération des fichiers GitHub: {e}")
-
-    return sorted(all_files)
-
 def backup_local_files():
     """Créer une sauvegarde des fichiers locaux avant extraction"""
     backup_dir = f"backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
-    # Utiliser tous les fichiers locaux pour la sauvegarde
-    files_to_backup = get_all_local_files()
+    files_to_backup = [
+        'Home Page/home.html',
+        'Home Page/home.css', 
+        'Home Page/home.js',
+        'Values Page/values.html',
+        'Values Page/values.css',
+        'Values Page/values.js',
+        'app.py',
+        'github_sync.py',
+        '.replit',
+        'requirements.txt'
+    ]
 
     backup_created = False
 
@@ -154,8 +97,20 @@ def pull_from_github(force=False):
         # Créer une sauvegarde avant extraction
         backup_dir = backup_local_files() if not force else None
 
-        # Obtenir tous les fichiers du repository GitHub
-        files_to_pull = get_all_github_files(github_repo, github_branch, headers)
+        # Obtenir la liste des fichiers depuis l'API GitHub
+        api_url = f"https://api.github.com/repos/{github_repo}/git/trees/{github_branch}?recursive=1"
+
+        try:
+            response = requests.get(api_url, headers=headers, timeout=15)
+            if response.status_code == 200:
+                tree_data = response.json()
+                files_to_pull = [item['path'] for item in tree_data.get('tree', []) if item['type'] == 'blob']
+            else:
+                print(f"⚠️ Impossible de récupérer la liste des fichiers: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"⚠️ Erreur lors de la récupération de la liste: {str(e)}")
+            return False
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         files_downloaded = 0
@@ -280,8 +235,51 @@ def sync_with_github():
             print(f"❌ Connexion GitHub impossible: {str(e)}")
             return False
 
-        # Obtenir tous les fichiers locaux à synchroniser
-        files_to_sync = get_all_local_files()
+        # Détection automatique de tous les fichiers avec exclusions
+        exclude_patterns = [
+            '__pycache__',
+            '.git',
+            'node_modules',
+            '.env',
+            'logs',
+            'backups',
+            'backup_*',
+            '.pythonlibs',
+            '.config',
+            'attached_assets',
+            '*.pyc',
+            '*.pyo',
+            '*.tmp',
+            '.cache'
+        ]
+
+        all_files = []
+        for root, dirs, files in os.walk('.'):
+            # Filtrer les dossiers à exclure
+            dirs[:] = [d for d in dirs if not any(d.startswith(pattern.rstrip('*')) or d == pattern for pattern in exclude_patterns)]
+
+            for file in files:
+                file_path = os.path.relpath(os.path.join(root, file), '.')
+
+                # Vérifier si le fichier doit être exclu
+                should_exclude = False
+                for pattern in exclude_patterns:
+                    if pattern.startswith('*'):
+                        if file_path.endswith(pattern[1:]):
+                            should_exclude = True
+                            break
+                    elif pattern.endswith('*'):
+                        if file_path.startswith(pattern[:-1]):
+                            should_exclude = True
+                            break
+                    elif pattern in file_path or file_path.startswith(pattern):
+                        should_exclude = True
+                        break
+
+                if not should_exclude and not file_path.startswith('./'):
+                    all_files.append(file_path)
+
+        files_to_sync = sorted(all_files)
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         files_updated = 0
@@ -291,6 +289,7 @@ def sync_with_github():
         print(f"⬆️ Synchronisation vers GitHub - {timestamp}")
         print(f"Repository: {github_repo}")
         print(f"Branche: {github_branch}")
+        print(f"📁 {len(files_to_sync)} fichiers détectés automatiquement")
         print("-" * 50)
 
         for file_path in files_to_sync:
@@ -387,11 +386,32 @@ def verify_sync_status():
     print("  • Tous les fichiers du projet (détection automatique)")
     print("  • Exclusions: __pycache__, .git, node_modules, .env, logs, backups")
 
-    # Afficher quelques exemples de fichiers détectés
-    local_files = get_all_local_files()
-    if local_files:
-        print(f"  • {len(local_files)} fichiers détectés localement")
-        print("  • Exemples:", ", ".join(local_files[:5]) + ("..." if len(local_files) > 5 else ""))
+    # Compter les fichiers locaux
+    exclude_patterns = ['__pycache__', '.git', 'node_modules', '.env', 'logs', 'backups', 'backup_*', '.pythonlibs', '.config', 'attached_assets', '*.pyc', '*.pyo', '*.tmp', '.cache']
+    local_files = []
+    for root, dirs, files in os.walk('.'):
+        dirs[:] = [d for d in dirs if not any(d.startswith(pattern.rstrip('*')) or d == pattern for pattern in exclude_patterns)]
+        for file in files:
+            file_path = os.path.relpath(os.path.join(root, file), '.')
+            should_exclude = False
+            for pattern in exclude_patterns:
+                if pattern.startswith('*'):
+                    if file_path.endswith(pattern[1:]):
+                        should_exclude = True
+                        break
+                elif pattern.endswith('*'):
+                    if file_path.startswith(pattern[:-1]):
+                        should_exclude = True
+                        break
+                elif pattern in file_path or file_path.startswith(pattern):
+                    should_exclude = True
+                    break
+            if not should_exclude and not file_path.startswith('./'):
+                local_files.append(file_path)
+
+    print(f"  • {len(local_files)} fichiers détectés localement")
+    if len(local_files) > 0:
+        print(f"  • Exemples: {', '.join(local_files[:5])}{'...' if len(local_files) > 5 else ''}")
 
     if github_repo and github_token:
         print("Status: ✅ Configuration complète")
