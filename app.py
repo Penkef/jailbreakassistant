@@ -58,27 +58,6 @@ def values_page():
     log_access()
     return send_from_directory('values_page', 'values.html')
 
-@app.route('/home_page/home.html')
-def legacy_home_redirect():
-    """Redirect legacy home URL to clean URL"""
-    return redirect('/home', code=301)
-
-@app.route('/values_page/values.html')
-def legacy_values_redirect():
-    """Redirect legacy values URL to clean URL"""
-    return redirect('/values', code=301)
-
-# Routes pour servir les fichiers statiques spécifiques
-@app.route('/home_page/<path:filename>')
-def serve_home_files(filename):
-    """Serve home_page static files"""
-    return send_from_directory('home_page', filename)
-
-@app.route('/pictures/<path:filename>')
-def serve_pictures(filename):
-    """Serve pictures"""
-    return send_from_directory('pictures', filename)
-
 @app.route('/<path:filename>')
 def serve_files(filename):
     """Serve static files and redirect old URLs"""
