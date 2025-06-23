@@ -1,0 +1,66 @@
+Requête de corrections et améliorations visuelles sur la page Values
+Je souhaite apporter plusieurs corrections pour améliorer l’apparence, la cohérence et la fluidité de la page "Values". Voici la liste détaillée des problèmes rencontrés et des modifications attendues :
+
+1. Position du texte "Built by the community, NOT by Badimo." / "Made by theblueel and penkef"
+Problème : Ces deux lignes sont mal placées ou ne s'affichent plus comme avant.
+
+Attendu : Ces deux phrases doivent apparaître l’une au-dessus de l’autre, juste en dessous de la section "About", comme c'était le cas auparavant.
+
+2. Animation de fond coloré selon la rareté (effet "glow")
+Problème : L’animation actuelle change la couleur par à-coups et donne un effet trop rigide.
+
+Attendu : L’animation doit être fluide et continue, avec des transitions douces entre les différentes teintes d’une même couleur (rouge, vert, violet, etc.). Il ne doit pas y avoir de coupures ou d’étapes visibles, mais plutôt un effet de dégradé animé très progressif.
+
+3. Pied de page (bas de page)
+Problème : Les textes "version" et "last updated" ne sont pas centrés horizontalement.
+
+Attendu : Ces éléments doivent être parfaitement centrés dans le pied de page, quel que soit le format de l’écran.
+
+4. Encadrement du bloc d'information principal
+Texte concerné :
+"The Jailbreak Assistant list is coming soon. In the meantime, we are using the Jailbreak Change Logs list with permission from Detox. Honorable mention to his Value Team for their consistent work!"
+
+Amélioration souhaitée :
+
+Ajouter un fond encadré autour de ce texte.
+
+Ce cadre doit avoir une ombre portée derrière pour donner l’illusion d’une légère profondeur (effet 3D).
+
+Le texte doit être clairement placé au-dessus du fond, sans être masqué.
+
+5. Taille excessive de la bannière principale
+Problème : La bannière en haut de la page est trop grande (voir pièce jointe), ce qui pousse le contenu vers le bas.
+
+Attendu : La bannière doit être redimensionnée pour ne prendre qu’une hauteur raisonnable, suffisante pour un bandeau d’en-tête. Elle doit rester visible, mais ne pas occuper plus d’un quart de l’écran, même en responsive.
+
+6. Barre de navigation ("Home", "Values", "History", "Dupe list")
+Amélioration souhaitée :
+
+Je souhaite que ces 4 boutons soient regroupés dans un seul bloc avec :
+
+Bords arrondis (radius sur tout le bloc),
+
+Fond semi-transparent légèrement bleuté,
+
+Et un effet de flou en arrière-plan pour que les éléments derrière soient visibles de manière floutée.
+
+Cela donnera un effet de menu flottant et moderne.
+
+Le design doit s’adapter à tous les formats (responsive).
+
+7. Barre de recherche sur mobile
+Problème : Sur les petits écrans (mobile), la barre de recherche est trop collée aux bords de l’écran.
+
+Attendu : Ajouter des marges latérales autour de la barre de recherche sur mobile, pour éviter qu’elle touche les bords. Elle doit rester lisible et bien centrée.
+
+8. Mise en forme du texte d’information (centrage équilibré)
+Texte concerné :
+"The Jailbreak Assistant list is coming soon..." (même texte que dans le point 4).
+
+Problème : Ce texte est actuellement centré de manière brute et cela rend certaines lignes déséquilibrées.
+
+Attendu :
+
+Le texte doit suivre une forme de bloc fluide, avec des retours à la ligne équilibrés, même si ce n’est pas parfaitement centré.
+
+Cela permettra de mieux structurer la lecture du texte et de renforcer son intégration dans le design global.
