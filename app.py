@@ -44,6 +44,9 @@ def after_request(response):
 def home():
     """Redirect to home page"""
     log_access()
+    # Synchronisation automatique à chaque accès à la page d'accueil
+    print("🔄 Synchronisation automatique avec GitHub...")
+    sync_with_github()
     return redirect('/home')
 
 @app.route('/home')
