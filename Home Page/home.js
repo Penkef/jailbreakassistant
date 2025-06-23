@@ -103,6 +103,30 @@ function updateLastModified() {
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
+    // Menu mobile
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileNavMenu = document.getElementById('mobileNavMenu');
+    
+    if (mobileMenuToggle && mobileNavMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileNavMenu.classList.toggle('open');
+        });
+        
+        // Fermer le menu quand on clique sur un lien
+        const mobileLinks = mobileNavMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNavMenu.classList.remove('open');
+            });
+        });
+        
+        // Fermer le menu quand on clique ailleurs
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuToggle.contains(e.target) && !mobileNavMenu.contains(e.target)) {
+                mobileNavMenu.classList.remove('open');
+            }
+        });
+    }
     console.log('DOM loaded - Jailbreak Assistant Home ready');
     
     // Mettre à jour la date de dernière modification
