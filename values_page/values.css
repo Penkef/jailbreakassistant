@@ -90,7 +90,7 @@ body::-webkit-scrollbar {
     display: none;
     position: fixed;
     top: 0;
-    right: -300px;
+    right: -280px;
     width: 280px;
     height: 100vh;
     background: rgba(26, 35, 126, 0.95);
@@ -145,7 +145,7 @@ body::-webkit-scrollbar {
     .mobile-nav-menu {
         position: fixed;
         top: 0;
-        right: -300px;
+        right: -280px;
         width: 280px;
         height: 100vh;
         margin: 0;
@@ -202,7 +202,7 @@ body::-webkit-scrollbar {
         display: none;
         position: fixed;
         top: 0;
-        right: -300px;
+        right: -280px;
         width: 280px;
         height: 100vh;
         transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
