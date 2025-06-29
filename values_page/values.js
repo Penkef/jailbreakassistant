@@ -145,15 +145,25 @@ function setupItemCardHandlers() {
     });
 }
 
-// Navigation mobile
+// Navigation mobile avec animation
 function setupMobileNavigation() {
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mobileNavMenu = document.getElementById('mobileNavMenu');
 
     if (mobileMenuToggle && mobileNavMenu) {
         mobileMenuToggle.addEventListener('click', function() {
-            mobileNavMenu.classList.toggle('open');
-            this.textContent = mobileNavMenu.classList.contains('open') ? '✕' : '☰';
+            if (mobileNavMenu.classList.contains('open')) {
+                // Fermer le menu
+                mobileNavMenu.classList.remove('open');
+                this.textContent = '☰';
+            } else {
+                // Ouvrir le menu
+                mobileNavMenu.style.display = 'block';
+                // Forcer un reflow pour que la transition fonctionne
+                mobileNavMenu.offsetHeight;
+                mobileNavMenu.classList.add('open');
+                this.textContent = '✕';
+            }
         });
 
         // Fermer le menu en cliquant sur un lien
@@ -168,8 +178,17 @@ function setupMobileNavigation() {
         // Fermer le menu en cliquant à l'extérieur
         document.addEventListener('click', function(event) {
             if (!mobileNavMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
-                mobileNavMenu.classList.remove('open');
-                mobileMenuToggle.textContent = '☰';
+                if (mobileNavMenu.classList.contains('open')) {
+                    mobileNavMenu.classList.remove('open');
+                    mobileMenuToggle.textContent = '☰';
+                }
+            }
+        });
+
+        // Cacher le menu après la transition de fermeture
+        mobileNavMenu.addEventListener('transitionend', function() {
+            if (!this.classList.contains('open')) {
+                this.style.display = 'none';
             }
         });
     }
