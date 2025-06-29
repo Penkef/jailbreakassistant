@@ -102,7 +102,7 @@ body::-webkit-scrollbar {
 }
 
 .mobile-nav-menu.open {
-    right: 0;
+    right: -20px;
 }
 
 .mobile-nav-menu a {
@@ -151,7 +151,7 @@ body::-webkit-scrollbar {
     }
 
     .mobile-nav-menu.open {
-        right: 0;
+        right: -20px;
     }
 }
 
@@ -522,7 +522,7 @@ p {
     }
 
     .mobile-nav-menu.open {
-        right: 0;
+        right: -20px;
     }
 
     .banner {
@@ -696,7 +696,7 @@ p {
     }
 
     .mobile-nav-menu.open {
-        right: 0;
+        right: -20px;
     }
 
     .banner {
