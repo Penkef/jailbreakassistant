@@ -126,7 +126,8 @@ body::-webkit-scrollbar {
 @media (max-width: 768px) {
     .navigation-bar {
         justify-content: flex-end;
-        padding-right: 15px;
+        padding-right: 20px;
+        padding-left: 20px;
     }
 
     .nav-links {
@@ -135,7 +136,7 @@ body::-webkit-scrollbar {
 
     .mobile-menu-toggle {
         display: block;
-        margin-left: 0;
+        margin-left: auto;
         margin-right: 0;
     }
 
