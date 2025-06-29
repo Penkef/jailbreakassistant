@@ -184,7 +184,7 @@ body::-webkit-scrollbar {
     z-index: 2;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
-    box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
     overflow-x: hidden;
     box-sizing: border-box;
 }
