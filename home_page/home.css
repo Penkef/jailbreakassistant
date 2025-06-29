@@ -86,24 +86,22 @@ body::-webkit-scrollbar {
 .mobile-nav-menu {
     position: fixed;
     top: 0;
-    right: -100%;
-    width: 250px;
+    right: -300px;
+    width: 280px;
     height: 100vh;
     background: rgba(26, 35, 126, 0.95);
     backdrop-filter: blur(20px);
     border-left: 2px solid rgba(255, 255, 255, 0.1);
     z-index: 999;
     padding: 60px 0 20px 0;
-    transition: right 0.3s ease;
-    display: block;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: none;
     margin: 0;
     box-sizing: border-box;
-    transform: translateX(100%);
 }
 
 .mobile-nav-menu.open {
     right: 0;
-    transform: translateX(0);
 }
 
 .mobile-nav-menu a {
@@ -134,18 +132,18 @@ body::-webkit-scrollbar {
     }
 
     .mobile-nav-menu {
-        display: block;
+        display: none;
         position: fixed;
         top: 0;
-        right: 0;
-        width: 250px;
+        right: -300px;
+        width: 280px;
         height: 100vh;
-        transition: transform 0.3s ease;
-        transform: translateX(100%);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .mobile-nav-menu.open {
-        transform: translateX(0);
+        display: block;
+        right: 0;
     }
 }
 
@@ -506,18 +504,18 @@ p {
     .mobile-nav-menu {
         position: fixed;
         top: 0;
-        right: 0;
-        width: 250px;
+        right: -300px;
+        width: 280px;
         height: 100vh;
         margin: 0;
         padding: 50px 0 20px 0;
-        transition: transform 0.3s ease;
-        transform: translateX(100%);
-        display: block;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: none;
     }
     
     .mobile-nav-menu.open {
-        transform: translateX(0);
+        display: block;
+        right: 0;
     }
 
     .banner {
@@ -683,16 +681,16 @@ p {
     .mobile-nav-menu {
         position: fixed;
         top: 0;
-        right: 0;
-        width: 250px;
+        right: -300px;
+        width: 280px;
         height: 100vh;
-        transition: transform 0.3s ease;
-        transform: translateX(100%);
-        display: block;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: none;
     }
     
     .mobile-nav-menu.open {
-        transform: translateX(0);
+        display: block;
+        right: 0;
     }
 
     .banner {
