@@ -637,11 +637,11 @@ p {
         padding-left: 15px;
         padding-right: 15px;
         padding-bottom: 0px;
-        margin-top: 30vh;
+        margin-top: calc(30vh - 15px);
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
         z-index: 20;
-        min-height: calc(100vh - 30vh);
+        min-height: calc(100vh - 30vh + 15px);
         position: relative;
         width: 100vw;
         max-width: 100vw;
@@ -717,14 +717,14 @@ p {
     .container {
         padding-top: 2.5vh;
         padding-bottom: 0px;
-        margin-top: 28vh;
+        margin-top: calc(28vh - 12px);
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         padding-left: 15px;
         padding-right: 15px;
         z-index: 20;
         position: relative;
-        min-height: calc(100vh - 28vh);
+        min-height: calc(100vh - 28vh + 12px);
         width: 100vw;
         max-width: 100vw;
         margin-left: 0;
