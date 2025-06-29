@@ -103,13 +103,24 @@ function updateLastModified() {
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    // Menu mobile
+    // Menu mobile avec animation
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mobileNavMenu = document.getElementById('mobileNavMenu');
     
     if (mobileMenuToggle && mobileNavMenu) {
         mobileMenuToggle.addEventListener('click', function() {
-            mobileNavMenu.classList.toggle('open');
+            if (mobileNavMenu.classList.contains('open')) {
+                // Fermer le menu
+                mobileNavMenu.classList.remove('open');
+                this.textContent = '☰';
+            } else {
+                // Ouvrir le menu
+                mobileNavMenu.style.display = 'block';
+                // Forcer un reflow pour que la transition fonctionne
+                mobileNavMenu.offsetHeight;
+                mobileNavMenu.classList.add('open');
+                this.textContent = '✕';
+            }
         });
         
         // Fermer le menu quand on clique sur un lien
@@ -117,13 +128,24 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileLinks.forEach(link => {
             link.addEventListener('click', function() {
                 mobileNavMenu.classList.remove('open');
+                mobileMenuToggle.textContent = '☰';
             });
         });
         
         // Fermer le menu quand on clique ailleurs
         document.addEventListener('click', function(e) {
             if (!mobileMenuToggle.contains(e.target) && !mobileNavMenu.contains(e.target)) {
-                mobileNavMenu.classList.remove('open');
+                if (mobileNavMenu.classList.contains('open')) {
+                    mobileNavMenu.classList.remove('open');
+                    mobileMenuToggle.textContent = '☰';
+                }
+            }
+        });
+        
+        // Cacher le menu après la transition de fermeture
+        mobileNavMenu.addEventListener('transitionend', function() {
+            if (!this.classList.contains('open')) {
+                this.style.display = 'none';
             }
         });
     }
