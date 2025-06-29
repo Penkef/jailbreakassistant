@@ -157,6 +157,9 @@ body::-webkit-scrollbar {
         max-height: 230px;
         top: 0;
         position: fixed;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
     }
 
     .container {
@@ -214,13 +217,17 @@ body::-webkit-scrollbar {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 .banner-image {
     width: 100%;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
     transform: none;
 }
 
@@ -1123,6 +1130,9 @@ p {
         height: 200px;
         top: 0;
         position: fixed;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
     }
 
     .values-title {
@@ -1256,6 +1266,9 @@ p {
         max-height: 200px;
         top: 0;
         position: fixed;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
     }
 
     .values-title {
