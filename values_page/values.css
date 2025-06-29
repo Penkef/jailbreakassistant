@@ -9,7 +9,19 @@ html, body {
     background: linear-gradient(135deg, #1a237e 0%, #283593 25%, #3949ab 50%, #1e3c72 75%, #2a5298 100%);
     color: white;
     overflow-x: hidden;
+    overflow-y: auto;
     box-sizing: border-box;
+    /* Masquer complètement la scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer/Edge */
+}
+
+/* Masquer scrollbar sur WebKit (Chrome, Safari) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    display: none;
 }
 
 * {
