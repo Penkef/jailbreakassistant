@@ -81,6 +81,7 @@ body::-webkit-scrollbar {
     cursor: pointer;
     padding: 10px;
     margin-left: auto;
+    margin-right: 0;
 }
 
 .mobile-nav-menu {
@@ -123,12 +124,19 @@ body::-webkit-scrollbar {
 }
 
 @media (max-width: 768px) {
+    .navigation-bar {
+        justify-content: flex-end;
+        padding-right: 15px;
+    }
+
     .nav-links {
         display: none;
     }
 
     .mobile-menu-toggle {
         display: block;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .mobile-nav-menu {
