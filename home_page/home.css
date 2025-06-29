@@ -95,13 +95,15 @@ body::-webkit-scrollbar {
     z-index: 999;
     padding: 60px 0 20px 0;
     transition: right 0.3s ease;
-    display: none;
+    display: block;
     margin: 0;
     box-sizing: border-box;
+    visibility: hidden;
 }
 
 .mobile-nav-menu.open {
     right: 0;
+    visibility: visible;
 }
 
 .mobile-nav-menu a {
@@ -133,6 +135,18 @@ body::-webkit-scrollbar {
 
     .mobile-nav-menu {
         display: block;
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 250px;
+        height: 100vh;
+        transition: right 0.3s ease;
+        visibility: hidden;
+    }
+    
+    .mobile-nav-menu.open {
+        right: 0;
+        visibility: visible;
     }
 }
 
@@ -499,6 +513,13 @@ p {
         margin: 0;
         padding: 50px 0 20px 0;
         transition: right 0.3s ease;
+        visibility: hidden;
+        display: block;
+    }
+    
+    .mobile-nav-menu.open {
+        right: 0;
+        visibility: visible;
     }
 
     .banner {
@@ -668,6 +689,13 @@ p {
         width: 250px;
         height: 100vh;
         transition: right 0.3s ease;
+        visibility: hidden;
+        display: block;
+    }
+    
+    .mobile-nav-menu.open {
+        right: 0;
+        visibility: visible;
     }
 
     .banner {
