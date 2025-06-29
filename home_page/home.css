@@ -87,7 +87,7 @@ body::-webkit-scrollbar {
 .mobile-nav-menu {
     position: fixed;
     top: 0;
-    right: -350px;
+    right: -500px;
     width: 280px;
     height: 100vh;
     background: rgba(26, 35, 126, 0.95);
@@ -144,7 +144,7 @@ body::-webkit-scrollbar {
         display: block;
         position: fixed;
         top: 0;
-        right: -350px;
+        right: -500px;
         width: 280px;
         height: 100vh;
         transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -512,7 +512,7 @@ p {
     .mobile-nav-menu {
         position: fixed;
         top: 0;
-        right: -1000px;
+        right: -500px;
         width: 280px;
         height: 100vh;
         margin: 0;
@@ -688,7 +688,7 @@ p {
     .mobile-nav-menu {
         position: fixed;
         top: 0;
-        right: -350px;
+        right: -500px;
         width: 280px;
         height: 100vh;
         transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
