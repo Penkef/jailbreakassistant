@@ -86,7 +86,7 @@ body::-webkit-scrollbar {
 .mobile-nav-menu {
     position: fixed;
     top: 0;
-    right: -250px;
+    right: -100%;
     width: 250px;
     height: 100vh;
     background: rgba(26, 35, 126, 0.95);
@@ -98,12 +98,12 @@ body::-webkit-scrollbar {
     display: block;
     margin: 0;
     box-sizing: border-box;
-    visibility: hidden;
+    transform: translateX(100%);
 }
 
 .mobile-nav-menu.open {
     right: 0;
-    visibility: visible;
+    transform: translateX(0);
 }
 
 .mobile-nav-menu a {
@@ -137,16 +137,15 @@ body::-webkit-scrollbar {
         display: block;
         position: fixed;
         top: 0;
-        right: -250px;
+        right: 0;
         width: 250px;
         height: 100vh;
-        transition: right 0.3s ease;
-        visibility: hidden;
+        transition: transform 0.3s ease;
+        transform: translateX(100%);
     }
     
     .mobile-nav-menu.open {
-        right: 0;
-        visibility: visible;
+        transform: translateX(0);
     }
 }
 
@@ -507,19 +506,18 @@ p {
     .mobile-nav-menu {
         position: fixed;
         top: 0;
-        right: -250px;
+        right: 0;
         width: 250px;
         height: 100vh;
         margin: 0;
         padding: 50px 0 20px 0;
-        transition: right 0.3s ease;
-        visibility: hidden;
+        transition: transform 0.3s ease;
+        transform: translateX(100%);
         display: block;
     }
     
     .mobile-nav-menu.open {
-        right: 0;
-        visibility: visible;
+        transform: translateX(0);
     }
 
     .banner {
@@ -685,17 +683,16 @@ p {
     .mobile-nav-menu {
         position: fixed;
         top: 0;
-        right: -250px;
+        right: 0;
         width: 250px;
         height: 100vh;
-        transition: right 0.3s ease;
-        visibility: hidden;
+        transition: transform 0.3s ease;
+        transform: translateX(100%);
         display: block;
     }
     
     .mobile-nav-menu.open {
-        right: 0;
-        visibility: visible;
+        transform: translateX(0);
     }
 
     .banner {
