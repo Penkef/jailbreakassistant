@@ -522,7 +522,7 @@ p {
     }
 
     .mobile-nav-menu.open {
-        right: -20px;
+        right: 0px;
     }
 
     .banner {
@@ -696,7 +696,7 @@ p {
     }
 
     .mobile-nav-menu.open {
-        right: -20px;
+        right: 0px;
     }
 
     .banner {
