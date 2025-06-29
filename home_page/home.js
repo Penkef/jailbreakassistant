@@ -115,9 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.textContent = '☰';
             } else {
                 // Ouvrir le menu
-                mobileNavMenu.style.display = 'block';
-                // Forcer un reflow pour que la transition fonctionne
-                mobileNavMenu.offsetHeight;
                 mobileNavMenu.classList.add('open');
                 this.textContent = '✕';
             }
@@ -142,12 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Cacher le menu après la transition de fermeture
-        mobileNavMenu.addEventListener('transitionend', function() {
-            if (!this.classList.contains('open')) {
-                this.style.display = 'none';
-            }
-        });
+        // Le menu reste toujours visible mais hors écran quand fermé
     }
     console.log('DOM loaded - Jailbreak Assistant Home ready');
     
